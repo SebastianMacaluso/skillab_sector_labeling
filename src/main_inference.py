@@ -40,29 +40,29 @@ def load_data(path, filename):
 
 
 
-fixed_prompt = """Based on the following job title and description, provide a single, concise occupational label and a company sector label that represent the best match. Only provide the labels as shown in the examples, nothing else.
+fixed_prompt = """Based on the following job title and description, provide single, concise occupational and a company sector labels that represent the best match. Only provide the labels as shown in the examples, nothing else.
 
 
 Example 1:
 Position title: Software Engineer (React).\n 
 Description: Join INTRALOT as a Software Engineer (React)!\nYour Role:\n\nAs a Software Engineer (React) at INTRALOT, you'll play a pivotal role in our Digital iLottery Projects!\n\nMore specifically, some of your main tasks will be: \n\n Participating in all phases of the development life cycle, focusing on coding and unit testing.\n Developing and maintaining functional and stable applications to meet company's needs.\n Designing and implementing highly scalable solutions for unpredictable traffic patterns.\n Following standard code practices and building reusable code and libraries for future use.\n Implementing security and data protection mechanisms.\n Optimizing the application for speed and scalability.\n Contributing to application strategy and planning.\nStaying up to date with emerging technologies and formulating concepts and ideas for additional products, tools and services to be provided.\nTo get this role, you should match the following criteria:\n\n You hold a University or College Degree in Computer Science, Software Engineering or relevant technology-related field.\n At least three (3) years of experience in Software Development.\n\n\n Strong working experience in Javascript (ES6), HTML5, CSS3, SASS and React.JS/MobX\n Experience in using version control software such as Git.\n Excellent understanding of the entire web development process (Design, Development and Deployment).You have an excellent command of the Greek & English language, both written and spoken\n  We work better as a TEAM. So, you also have to be an excellent team player.\n\nNice to have, but not necessary:\nExperience in developing and maintaining high-quality React Native applications using clean code.\n\nAbout Us: INTRALOT, a publicly listed company established in 1992, is a leading gaming solutions supplier and operator active in 39 regulated jurisdictions worldwide. With a global workforce of approximately 1,700 employees, INTRALOT is committed to redefine innovation and quality of services in the lottery and gaming sector, while supporting operators in raising funds for good causes. In 2023, INTRALOT was distinguished as a top ten most attractive employer brands in Greece.\nINTRALOT has been awarded the prestigious WLA Responsible Gaming Framework Certification by the World Lottery Association. We always act with integrity and enjoy what we do.\n\nWhy Join Us:\n A competitive compensation package combined with additional benefits.\n Hybrid working model.\n Private Insurance for you and your family. \n Modern facilities, parking inside, enticing restaurant and corporate bus.\n An extensive training program upon induction and throughout employment.\n Exceptional opportunities to learn and develop in a multinational environment.\n Prospects for professional growth both locally and globally. \nEqual Opportunity Employer: We celebrate diversity and are proud to be an Equal Opportunity Employer. We welcome applicants from all backgrounds and do not discriminate based on race, color, religion, gender, sexual orientation, national origin, age, marital status, medical condition, disability, or any other protected status. Our premises in Paiania, Attica, are accessible to individuals with disabilities. Join us in shaping the future of gaming and lottery solutions!\n 
-Occupational label: Software Developer. 
-Sector label: Lottery gaming.
+Occupational label: Software Developer
+Sector label: Gaming and E-sports
 
 
 Example 2:
 Position title: Data project manager 
-Description: Company descriptionGTT is the world leader in containment technologies for maritime transport and storage of Liquefied Natural Gas (LNG). Today, energy transition and innovation are at the heart of our concerns. GTT achieves more than 300M€ turnover per year with more than 500 employees spread across the world.To support the growth of the group, we are recruiting a Data Project Manager, attached to the IT Department.Job descriptionCONTEXT:At within the Digital and Information Systems Department, under the responsibility of the AMOA Manager, the Data project manager is responsible for designing, developing and implementing a global data management strategy aimed at optimizing data management within of GTT. Its role is essential to ensure the collection, storage, security and efficient use of data in compliance with business needs and current regulations. MAIN RESPONSIBILITIES: Business Needs Analysis: Work in collaboration with the various business teams to identify their data needs.Define data management solutions adapted to support the company's objectives.Definition of the Data Management Strategy:Develop a global data management strategy aligned with the objectives of GTT.Establish KPIs to evaluate and measure the effectiveness of the strategy. Data Management: Establish processes for the collection, quality, storage and security of data. Ensure the consistency and integrity of data across the company.Selection and Implementation of Technological Tools:Evaluate, choose and deploy the appropriate technological tools and platforms for data management.Collaborate with technical teams to guarantee effective integration.Communication and Training:Make employees aware of the importance of data management.Organize training as needed and communicate regularly on progress.Monitoring and Evaluation:Monitor KPIs and adjust the strategy accordingly.Present periodic reports to management on the progress of the project.Qualifications SIGNIFICANT SKILLS: Technical skills: IT project and program management, certification in PMP or Prince 2 is a plus; In-depth knowledge of data technologies: (BI tools, data security, Cloud Computing, Storage system, MDM, Tools of ETL..Etc.);In-depth knowledge of data regulations;Experience in managing integration projects (CDC, AO, contractualization, integration, deployment);Proficiency in oral and written English is desired. Human skills: Excellent communication skills; Ability to work in a team and collaborate with different stakeholders; Rigor, ability to solve complex problems and results orientation. LEVEL OF STUDIES & EXPERIENCE: Graduate engineering school in engineering IT (specialized in data or equivalent); Significant experience in data management as a project manager or project manager; Additional information CONTRACT AND BENEFITS: This position is to be filled on a permanent basis You will benefit from the following package: Base salary (To be defined according to profile)Bonus on individual objective (20%)Incentive (15%)Participation (8%)Company contribution to the PEE of €3,700You will benefit from a hybrid teleworking schedule (2 days/week)Our green campus of 8 hectares has a company restaurantWe are connected to the RER B and C as well as the Transilien N and U lines, and provide you with free shuttles (at the St Remy-les Chevreuse and Versailles Chantier stations)We We also offer one-off access to our Parisian premises. Join a company involved in the environmental transition!
-Occupational label: Project manager.
-Sector label: Engineering.
+Description: Company descriptionGTT is the world leader in containment technologies for maritime transport and storage of Liquefied Natural Gas (LNG). Today, energy transition and innovation are at the heart of our concerns. GTT achieves more than 300M€ turnover per year with more than 500 employees spread across the world. To support the growth of the group, we are recruiting a Data Project Manager, attached to the IT Department.Job description CONTEXT:At within the Digital and Information Systems Department, under the responsibility of the AMOA Manager, the Data project manager is responsible for designing, developing and implementing a global data management strategy aimed at optimizing data management within of GTT. Its role is essential to ensure the collection, storage, security and efficient use of data in compliance with business needs and current regulations. MAIN RESPONSIBILITIES: Business Needs Analysis: Work in collaboration with the various business teams to identify their data needs.Define data management solutions adapted to support the company's objectives.Definition of the Data Management Strategy:Develop a global data management strategy aligned with the objectives of GTT.Establish KPIs to evaluate and measure the effectiveness of the strategy. Data Management: Establish processes for the collection, quality, storage and security of data. Ensure the consistency and integrity of data across the company.Selection and Implementation of Technological Tools:Evaluate, choose and deploy the appropriate technological tools and platforms for data management.Collaborate with technical teams to guarantee effective integration.Communication and Training:Make employees aware of the importance of data management.Organize training as needed and communicate regularly on progress.Monitoring and Evaluation:Monitor KPIs and adjust the strategy accordingly.Present periodic reports to management on the progress of the project.Qualifications SIGNIFICANT SKILLS: Technical skills: IT project and program management, certification in PMP or Prince 2 is a plus; In-depth knowledge of data technologies: (BI tools, data security, Cloud Computing, Storage system, MDM, Tools of ETL..Etc.);In-depth knowledge of data regulations;Experience in managing integration projects (CDC, AO, contractualization, integration, deployment);Proficiency in oral and written English is desired. Human skills: Excellent communication skills; Ability to work in a team and collaborate with different stakeholders; Rigor, ability to solve complex problems and results orientation. LEVEL OF STUDIES & EXPERIENCE: Graduate engineering school in engineering IT (specialized in data or equivalent); Significant experience in data management as a project manager or project manager; Additional information CONTRACT AND BENEFITS: This position is to be filled on a permanent basis You will benefit from the following package: Base salary (To be defined according to profile)Bonus on individual objective (20%)Incentive (15%)Participation (8%)Company contribution to the PEE of €3,700You will benefit from a hybrid teleworking schedule (2 days/week)Our green campus of 8 hectares has a company restaurantWe are connected to the RER B and C as well as the Transilien N and U lines, and provide you with free shuttles (at the St Remy-les Chevreuse and Versailles Chantier stations)We We also offer one-off access to our Parisian premises. Join a company involved in the environmental transition!
+Occupational label: data project manager
+Sector label: Transportation and storage
 
 Example 3:
 Position title: NURSE IN OPERATING ROOM (M/F) 
 Description: Want to escape? Going towards new horizons? Oh no you are not dreaming! Vitalis Médical Var invites you to escape to the Isle of Beauty! Recruitment specialist in the field of Health, VITALIS MEDICAL is recruiting an IBODE or Block IDE (M/F) for a fixed-term contract; Permanent contract possible...! At Vitalis Médical, you can benefit from: Loyalty program from the first hour of mission Company mutual insurance Local management based on trust, autonomy, transparency, and good humor! Sponsorship bonus Your missions Under the Responsibility of the Head of Block, your main missions are: - Ensure and monitor maintenance and instrumentation - Ensure the quality of the premises - Provide equipment, instrumentation, specific installation for the patient - Ensure care adapted to patients (reception, verification of identity, comfort, installation, control of the patient's pre-operative preparation). - Check the proper functioning of the equipment before its use (including respirators in the operating room). - Prepare and check the equipment specific to the instrumentation (sterile linen, ligature, etc.) - Master the procedures and respect the established protocols. You have free accommodation (apartment hotel) and travel expenses are covered. Morning schedule or afternoon with on-call duty once a week and one weekend per month. Profile sought State-certified operating room nurses or IDE with at least 2 years of experience in the operating room or versatile IDE with experience as a whole. You are motivated, demonstrate adaptability, involvement and great professional rigor, then this position is made for you. Possibility of continuing on other missions. The VITALIS Team is here for YOU, candidate, to take the time to listen to you, to understand your career path and your professional project, in order to better guide you towards the opportunities that suit YOU. Do not hesitate to forward this announcement to those around you. Additional information Type Contract: Fixed-term contract Working time: Full-time Salary: €20 - €30 per hour
-Occupational label: Nurse.
-Sector label: Healthcare.
+Occupational label: other
+Sector label: Human health and social services activities
 
-Now, please provide an occupational label and a sector label for the following input. (Note: the output format should match exctly the following: [Occupational label: label \n Sector label: label'] and nothing else.)
+Now, please provide an occupational label and a sector label for the following input. (Note: the output format should match exctly the following: [Occupational label: label \n Sector label: label] and nothing else.)
 """
 
 
@@ -309,45 +309,133 @@ if __name__ == "__main__":
     # system_message = """You are an expert career advisor specializing in job classification. Your task is to analyze job titles and descriptions and provide a concise, standardized occupational label that best represents the position as well as a company sector label that best represents the sector of the company."""
     # prompt = """Based on the following job title and description, provide a single, concise occupational label that best represents this position as well as a company sector label that best represents the sector of the company. Only provide the label, nothing else.
 
-    system_message = """You are an expert career advisor specializing in job classification. Your task is to analyze job titles and descriptions and provide a concise, standardized occupational label and a company sector label. Each label should be chosen from the lists detailed below, choosing the label that represents the best match. 
+
+
+    # occupational labels = [
+    # "Software developer",
+    # "Data scientist",
+    # "Data engineer",
+    # "Cybersecurity specialist",
+    # "Artificial intelligence specialist",
+    # "Machine learning engineer",
+    # "Cloud computing specialist",
+    # "IT project manager",
+    # "Systems analyst",
+    # "Database administrator",
+    # "Network administrator",
+    # "Web developer",
+    # "Mobile application developer",
+    # "DevOps engineer",
+    # "IT support technician",
+    # "Game developer",
+    # "Blockchain developer",
+    # "UX/UI designer",
+    # "IT business analyst",
+    # "Embedded systems developer",
+    # "Project manager",
+    # "Nurse",
+    # "Healthcare specialist",
+    # "HR manager",
+    # "Sales manager",
+    # "Marketing manager",
+    # "Financial analyst",
+    # "Accountant",
+    # "Audit manager",
+    # "Risk manager",
+    # "IT manager",
+    # ]
+
+#  company sector labels = [
+#     "Agriculture, Forestry, Fishery",
+#     "Arts, entertainment and recreation",
+#     "Hospitality and Tourism",
+#     "Human health and social services activities",
+#     "ICT service activities",
+#     "Manufacturing of food, beverages and tobacco",
+#     "Manufacturing of Textile, Apparel, Leather, Footwear and related products",
+#     "Mining and heavy industry",
+#     "Transportation and storage",
+#     "Veterinary activities",
+#     "Wholesale and retail trade, renting and leasing",
+#     "Business administration",
+#     "Chemical industry",
+#     "Construction",
+#     "Education",
+#     "Energy and water supply, sewerage and waste management",
+#     "Finance, insurance and real estate",
+#     "Manufacturing of consumer goods except food, beverages, tobacco, textile, apparel, leather",
+#     "Manufacturing of electrical equipment, computer, electronic and optical products",
+#     "Manufacturing of fabricated metal products, except machinery and equipment"
+# ]
+
+    system_message = """You are an expert career advisor specializing in job classification. Your task is to analyze job titles and descriptions and provide concise, standardized occupational and company sector labels. Each label should be chosen from the lists detailed below, choosing the label that represents the best match. 
     
     The occupational label should be the best candidate among the following list (in python format):
-    occupational labels = [
-    "Software developer",
-    "Data scientist",
-    "Data engineer",
-    "Cybersecurity specialist",
-    "Artificial intelligence specialist",
-    "Machine learning engineer",
-    "Cloud computing specialist",
-    "IT project manager",
-    "Systems analyst",
-    "Database administrator",
-    "Network administrator",
-    "Web developer",
-    "Mobile application developer",
-    "DevOps engineer",
-    "IT support technician",
-    "Game developer",
-    "Blockchain developer",
-    "UX/UI designer",
-    "IT business analyst",
-    "Embedded systems developer",
-    "Project manager",
-    "Nurse",
-    "Healthcare specialist",
-    "HR manager",
-    "Sales manager",
-    "Marketing manager",
-    "Financial analyst",
-    "Accountant",
-    "Audit manager",
-    "Risk manager",
-    "IT manager",
-    ]
+
+    occupational labels = ["computer scientist",
+    "computer vision engineer", 
+    "data analyst",
+    "data scientist",
+    "embedded system designer",
+    "enterprise architect", 
+    "green ICT consultant",
+    "ICT business analysis manager",
+    "ICT business analyst",
+    "ICT consultant",
+    "artificial intelligence engineer",
+    "ICT research consultant", 
+    "ICT system analyst",
+    "ICT system architect",
+    "ICT system developer",
+    "ICT system integration consultant",
+    "integration engineer",
+    "IT auditor",
+    "user experience analyst", 
+    "data engineer",
+    "cloud engineer",
+    "software analyst",
+    "software architect", 
+    "software developer",
+    "user interface developer",
+    "cloud architect",
+    "cloud DevOps engineer",
+    "cloud software developer",
+    "IoT developer",
+    "digital games developer",
+    "search engine optimisation expert",
+    "user interface designer",
+    "web content manager",
+    "web developer",
+    "ICT application configurator",
+    "ICT application developer",
+    "industrial mobile devices software developer",
+    "numerical tool and process control programmer",
+    "cloud identity manager",
+    "data project manager",
+    "other"]
 
 The company sector label should be the best candidate among the following list (in python format):
     company sector labels = [
+    "Telecommunications",
+    "Computer Programming and Consultancy",
+    "Software Publishing",
+    "Data Processing and Hosting",
+    "Cybersecurity",
+    "Artificial Intelligence and Machine Learning",
+    "Internet of Things (IoT)",
+    "Cloud Computing",
+    "Big Data and Analytics",
+    "E-commerce and Digital Payments",
+    "Digital Education (EdTech)",
+    "Gaming and E-sports",
+    "Financial Technology (FinTech)",
+    "Healthcare Technology (HealthTech)",
+    "Manufacture of Electronic Components",
+    "Manufacture of Computers and Peripherals",
+    "Telecommunication Equipment Manufacturing",
+    "Consumer Electronics Manufacturing",
+    "IT Infrastructure Management",
+    "Digital Content Creation and Distribution",
     "Agriculture, Forestry, Fishery",
     "Arts, entertainment and recreation",
     "Hospitality and Tourism",
@@ -368,7 +456,11 @@ The company sector label should be the best candidate among the following list (
     "Manufacturing of consumer goods except food, beverages, tobacco, textile, apparel, leather",
     "Manufacturing of electrical equipment, computer, electronic and optical products",
     "Manufacturing of fabricated metal products, except machinery and equipment"
-]"""
+    "other"
+]
+
+
+"""
 
   
 
@@ -381,7 +473,7 @@ The company sector label should be the best candidate among the following list (
     my_prompts = load_data("../Data/filtered_jobs", "occupations_SE_GAP_analysis.csv")
     my_prompts['source_id'] = list(my_prompts['source_id'])
     
-    results = {"occupations": [], "sectors": [], "source_id": []}
+    results = {"source_id": [], "occupations": [], "sectors": []}
     k_total=0
 
     start_time = time.time()
@@ -399,9 +491,10 @@ The company sector label should be the best candidate among the following list (
 
         try:
             llm_occ, llm_sec, k_total = process_output_llms(output, k=k_total)
+            results["source_id"].append(my_prompts['source_id'][i])
             results["occupations"].append(llm_occ)
             results["sectors"].append(llm_sec)
-            results["source_id"].append(my_prompts['source_id'][i])
+            
             # print("results: ", results)
         except ValueError as e:
             print(e)
@@ -419,6 +512,6 @@ The company sector label should be the best candidate among the following list (
     print("--------------------------------")
     # print("Results: ", results)
     df = pd.DataFrame(results)
-    df.to_csv('../Data/classified_ads/filtered_jobs_classifications.csv', 
+    df.to_csv('../Data/classified_ads/filtered_jobs_classifications_ESCO.csv', 
           index=False,
           encoding='utf-8')
