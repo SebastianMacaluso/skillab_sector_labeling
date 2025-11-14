@@ -273,12 +273,12 @@ def parse_arguments():
         type=str,
         help="name of the model",
         # default="Qwen/Qwen2.5-32B-Instruct",
-        default="Qwen/Qwen3-32B-Instruct",
+        # default="Qwen/Qwen3-32B-Instruct",
         # Alternative Qwen models:
         # default="Qwen/Qwen2.5-32B",
         # default="Qwen/Qwen-72B-Chat",
         # Other models (for reference):
-        # default="meta-llama/Meta-Llama-3-8B-Instruct",
+        default="meta-llama/Meta-Llama-3-8B-Instruct",
         # default="mistralai/Mistral-7B-v0.1",
         # default="meta-llama/Llama-3.1-8B-Instruct",
         # default="deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
