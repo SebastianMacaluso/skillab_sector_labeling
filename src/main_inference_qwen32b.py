@@ -68,22 +68,28 @@ Now, please provide a sector label for the following input. (Note: the output fo
 
 
 def process_output_llms(output:list, k=0)->list:
-    # Regular expression to extract the sector label only
-    pattern = r".*Sector label:\s*(.*?)\].*$"
-            
-    # print("pattern: ", pattern)
-    print("output: ", output)
-    # Extracting the values using re.search
-    match = re.search(pattern, output[0], re.DOTALL)
-    # print("match: ", match)
-    if match:
-        sector_label = match.group(1).strip().strip(".")
-    else:
-        sector_label = "NaN"
-        k+=1
-        raise ValueError("Warning: Could not find the sector label")
+    # Regular expression to extract the sector label
+    # Pattern 1: Match "Sector label: xxx" format (with or without brackets)
+    pattern1 = r"Sector label:\s*\[?\s*(.*?)(?:\]|$)"
+    # Pattern 2: Match just quoted labels as fallback (e.g., '"Manufacturing"')
+    pattern2 = r'^[\'"](.*?)[\'"]$'
     
-
+    print("output: ", output)
+    
+    # Try pattern 1 first (standard format)
+    match = re.search(pattern1, output[0], re.DOTALL | re.IGNORECASE)
+    if match:
+        sector_label = match.group(1).strip().strip(".").strip('"').strip("'")
+    else:
+        # Try pattern 2 for quoted labels without prefix
+        match = re.search(pattern2, output[0].strip(), re.DOTALL)
+        if match:
+            sector_label = match.group(1).strip().strip(".")
+        else:
+            sector_label = "NaN"
+            k+=1
+            raise ValueError("Warning: Could not find the sector label")
+    
     print("Sector Label:", sector_label)
     print("--------------------------------")
 
