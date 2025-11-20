@@ -1,8 +1,12 @@
+
+# CUDA_VISIBLE_DEVICES=3 python main.py --use_quantization True --max_samples 100
+
 import argparse
 from typing import Union
 import os
 import time
 import torch
+from datetime import datetime
 
 from fastapi import FastAPI
 import pandas as pd
@@ -12,9 +16,19 @@ from main_inference_qwen32b import LLMInference, process_output_llms, fixed_prom
 app = FastAPI()
 
 # System message for LLM inference
-SYSTEM_MESSAGE = """You are an expert career advisor specializing in company sector classification. Your task is to analyze job titles and descriptions and provide a concise, standardized company sector label. The label should be chosen from the list detailed below, choosing the label that represents the best match. 
+SYSTEM_MESSAGE = """You are an expert career advisor specializing in company sector classification. Your task is to analyze job titles and descriptions to identify the COMPANY'S SECTOR (industry), not the job role itself.
 
-The company sector label should be the best candidate among the following list (in python format):
+CRITICAL INSTRUCTIONS:
+1. You MUST select exactly ONE label from the list below - no exceptions.
+2. Focus on the COMPANY'S industry/sector based on clues in the job description, not the job position.
+3. For example: An "accountant" position at a pharmaceutical company should be classified as "Human health and social work activities" (the pharma sector), NOT "Consultancy, marketing, accounting and legal services" (the job role).
+4. Look for company context clues: products, services, company name, industry keywords in the description.
+5. DO NOT include any thinking, reasoning, or explanation in your 
+response.
+6. DO NOT use <think> tags or show your thought process.
+7. Output ONLY the sector label in the exact format shown in the examples.
+
+You MUST choose exactly ONE label from the following list:
 
 company sector labels = [
 "Manufacturing",
@@ -139,12 +153,14 @@ def get_jobs_recommendations(item_id: int, options: Union[str, None] = None):
     print("result: ", result.keys())
     df = pd.DataFrame(result["items"])
     
-    # Save dataframe to Data directory
+    # Save dataframe to Data/sector directory
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    output_dir = os.path.join(base_dir, "Data")
+    output_dir = os.path.join(base_dir, "Data", "sector")
     os.makedirs(output_dir, exist_ok=True)
     
-    raw_data_path = os.path.join(output_dir, "raw_job_data_from_api.csv")
+    # Add timestamp to filename
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    raw_data_path = os.path.join(output_dir, f"raw_job_data_from_api_{timestamp}.csv")
     df.to_csv(raw_data_path, index=False, encoding='utf-8')
     print(f"Saved raw data to: {raw_data_path}")
     
@@ -161,8 +177,16 @@ if __name__ == "__main__":
     parser.add_argument(
         "--model_name",
         type=str,
-        default="meta-llama/Meta-Llama-3-8B-Instruct",
-        help="LLM model name (default: meta-llama/Meta-Llama-3-8B-Instruct)"
+        default="meta-llama/Meta-Llama-3.1-8B-Instruct",
+        # default="Qwen/Qwen3-8B",
+        # default="Qwen/Qwen3-32B",
+        help="LLM model name (default: Qwen/Qwen2.5-32B-Instruct)"
+        # Other model options:
+        # - "meta-llama/Meta-Llama-3-8B-Instruct"
+        # - "meta-llama/Meta-Llama-3.1-8B-Instruct"
+        # - "meta-llama/Llama-2-7b-chat-hf"
+        # - "mistralai/Mistral-7B-Instruct-v0.2"
+        # - "gpt" (for OpenAI GPT models)
     )
     parser.add_argument(
         "--use_quantization",
@@ -189,9 +213,26 @@ if __name__ == "__main__":
     
     # Get job data
     print("Fetching job data from API...")
-    df = get_jobs_recommendations(args.item_id, args.options)
-    print(f"Retrieved {len(df)} jobs")
-    print(f"DataFrame columns: {list(df.columns)}\n")
+    try:
+        df = get_jobs_recommendations(args.item_id, args.options)
+        print(f"Retrieved {len(df)} jobs from API")
+        print(f"DataFrame columns: {list(df.columns)}\n")
+    except Exception as e:
+        print(f"API request failed: {e}")
+        print("Loading data from local fallback file...")
+        
+        # Fallback to local CSV file
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        fallback_path = os.path.join(base_dir, "Data", "sector", "raw_job_data_from_api.csv")
+        
+        if os.path.exists(fallback_path):
+            df = pd.read_csv(fallback_path)
+            print(f"Successfully loaded {len(df)} jobs from fallback file: {fallback_path}")
+            print(f"DataFrame columns: {list(df.columns)}\n")
+        else:
+            print(f"Error: Fallback file not found at {fallback_path}")
+            print("Cannot proceed without data. Exiting.")
+            exit(1)
     
     if not args.skip_inference:
         # Load model
@@ -220,8 +261,14 @@ if __name__ == "__main__":
         
         # Save results
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        output_dir = os.path.join(base_dir, "Data")
-        output_path = os.path.join(output_dir, "job_data_with_sectors.csv")
+        output_dir = os.path.join(base_dir, "Data", "sector")
+        os.makedirs(output_dir, exist_ok=True)
+        
+        # Create filename with model name and number of jobs
+        model_name_clean = model_name.replace('/', '_').replace('.', '_')
+        num_jobs = len(df_with_sectors)
+        output_filename = f"job_data_with_sectors_{model_name_clean}_{num_jobs}_jobs.csv"
+        output_path = os.path.join(output_dir, output_filename)
         
         df_with_sectors.to_csv(output_path, index=False, encoding='utf-8')
         print(f"Saved classified data to: {output_path}")
@@ -247,14 +294,26 @@ if __name__ == "__main__":
 # Process only first 10 jobs (for testing):
 #   python src/main.py --max_samples 10
 #
-# Use a different model:
+# Use a different model (Qwen 32B):
 #   CUDA_VISIBLE_DEVICES=0 python src/main.py --model_name Qwen/Qwen2.5-32B-Instruct
+#
+# Use Llama 3.1:
+#   CUDA_VISIBLE_DEVICES=0 python src/main.py --model_name meta-llama/Meta-Llama-3.1-8B-Instruct
+#
+# Use Mistral:
+#   CUDA_VISIBLE_DEVICES=0 python src/main.py --model_name mistralai/Mistral-7B-Instruct-v0.2
+#
+# Use GPT (OpenAI):
+#   python src/main.py --model_name gpt
 #
 # Skip inference and only download data:
 #   python src/main.py --skip_inference
 #
 # Run without quantization (requires more GPU memory):
 #   CUDA_VISIBLE_DEVICES=0,1 python src/main.py --use_quantization False
+#
+# Note: If API connection fails, the script automatically falls back to:
+#   Data/sector/raw_job_data_from_api.csv
 #
 # ==============================================================================
 # FastAPI Server Usage:
